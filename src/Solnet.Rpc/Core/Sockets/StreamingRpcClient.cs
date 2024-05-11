@@ -135,7 +135,7 @@ namespace Solnet.Rpc.Core.Sockets
         private async Task ReadNextMessage(CancellationToken cancellationToken = default)
         {
             var buffer = new byte[32768];
-            Memory<byte> mem = new Memory<byte>(buffer);
+            Memory<byte> mem = new(buffer);
             ValueWebSocketReceiveResult result = await ClientSocket.ReceiveAsync(mem, cancellationToken).ConfigureAwait(false);
             int count = result.Count;
 
@@ -147,7 +147,7 @@ namespace Solnet.Rpc.Core.Sockets
             {
                 if (!result.EndOfMessage)
                 {
-                    MemoryStream ms = new MemoryStream();
+                    MemoryStream ms = new();
                     ms.Write(mem.Span);
 
 

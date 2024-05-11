@@ -21,7 +21,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             Account fromAccount = wallet.GetAccount(10);
             Account toAccount = wallet.GetAccount(8);
@@ -55,7 +55,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
@@ -125,7 +125,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
@@ -174,7 +174,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc = rpcClient.GetMinimumBalanceForRentExemption(TokenProgram.TokenAccountDataSize).Result;
@@ -230,7 +230,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
@@ -291,7 +291,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             RequestResult<ResponseValue<BlockHash>> blockHash = rpcClient.GetRecentBlockHash();
             ulong minBalanceForExemptionAcc =
@@ -339,7 +339,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             Account ownerAccount = wallet.GetAccount(10);
             Console.WriteLine($"OwnerAccount: {ownerAccount}");
@@ -356,7 +356,7 @@ namespace Solnet.Examples
             Console.WriteLine($"NonceAccount Nonce: {nonceAccountData.Nonce.Key}");
 
             // Initialize the nonce information to be used with the transaction
-            NonceInformation nonceInfo = new NonceInformation()
+            NonceInformation nonceInfo = new()
             {
                 Nonce = nonceAccountData.Nonce,
                 Instruction = SystemProgram.AdvanceNonceAccount(
@@ -447,7 +447,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             Account fromAccount = wallet.GetAccount(10);
             Account toAccount = wallet.GetAccount(8);

@@ -4,7 +4,7 @@ namespace Solnet.KeyStore.Crypto
 {
     public class RandomBytesGenerator : IRandomBytesGenerator
     {
-        private static readonly SecureRandom Random = new SecureRandom();
+        private static readonly SecureRandom Random = new();
 
         public byte[] GenerateRandomInitializationVector()
         {

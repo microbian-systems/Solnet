@@ -23,7 +23,7 @@ namespace Solnet.Examples
 
         public void Run()
         {
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             /*
              * The following region creates and initializes a mint account, it also creates a token account

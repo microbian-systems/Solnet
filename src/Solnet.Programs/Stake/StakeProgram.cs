@@ -392,7 +392,7 @@ namespace Solnet.Programs
             {
                 keys.Add(AccountMeta.ReadOnly(lockup.Custodian, true));
             }
-            Lockup lockupChecked = new Lockup
+            Lockup lockupChecked = new()
             {
                 UnixTimestamp = lockup.UnixTimestamp,
                 Epoch = lockup.Epoch

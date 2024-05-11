@@ -82,7 +82,7 @@ namespace Solnet.Rpc.Builders
             }
 
             int accountKeysBufferSize = _accountKeysList.AccountList.Count * 32;
-            MemoryStream accountKeysBuffer = new MemoryStream(accountKeysBufferSize);
+            MemoryStream accountKeysBuffer = new(accountKeysBufferSize);
             byte[] instructionsLength = ShortVectorEncoding.EncodeLength(compiledInstructions.Count);
 
             foreach (AccountMeta accountMeta in keysList)
@@ -106,7 +106,7 @@ namespace Solnet.Rpc.Builders
             int messageBufferSize = MessageHeader.Layout.HeaderLength + BlockHashLength +
                                     accountAddressesLength.Length +
                                     +instructionsLength.Length + compiledInstructionsLength + accountKeysBufferSize;
-            MemoryStream buffer = new MemoryStream(messageBufferSize);
+            MemoryStream buffer = new(messageBufferSize);
             byte[] messageHeaderBytes = _messageHeader.ToBytes();
 
             buffer.Write(new byte[] { 128 }, 0, 1);

@@ -23,7 +23,7 @@ namespace Solnet.Rpc
         /// <summary>
         /// Message Id generator.
         /// </summary>
-        private readonly IdGenerator _idGenerator = new IdGenerator();
+        private readonly IdGenerator _idGenerator = new();
 
         /// <summary>
         /// Initialize the Rpc Client with the passed url.
@@ -48,7 +48,7 @@ namespace Solnet.Rpc
         /// <typeparam name="T">The type of the request result.</typeparam>
         /// <returns>A task which may return a request result.</returns>
         private JsonRpcRequest BuildRequest<T>(string method, IList<object> parameters)
-            => new JsonRpcRequest(_idGenerator.GetNextId(), method, parameters);
+            => new(_idGenerator.GetNextId(), method, parameters);
 
         /// <summary>
         /// 
@@ -355,7 +355,7 @@ namespace Solnet.Rpc
             string identity = null, ulong? firstSlot = null, ulong? lastSlot = null,
             Commitment commitment = Commitment.Finalized)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            Dictionary<string, object> parameters = new();
 
             if (commitment != Commitment.Finalized)
             {
@@ -369,7 +369,7 @@ namespace Solnet.Rpc
 
             if (firstSlot.HasValue)
             {
-                Dictionary<string, object> range = new Dictionary<string, object> { { "firstSlot", firstSlot.Value } };
+                Dictionary<string, object> range = new() { { "firstSlot", firstSlot.Value } };
 
                 if (lastSlot.HasValue)
                 {

@@ -54,7 +54,7 @@ namespace Solnet.Programs.Abstract
         protected async Task<RequestResult<string>> SignAndSendTransaction(TransactionInstruction instruction, PublicKey feePayer, 
             Func<byte[], PublicKey, byte[]> signingCallback, Commitment commitment = Commitment.Finalized)
         {
-            TransactionBuilder tb = new TransactionBuilder();
+            TransactionBuilder tb = new();
             tb.AddInstruction(instruction);
 
             var recentHash = await RpcClient.GetRecentBlockHashAsync();

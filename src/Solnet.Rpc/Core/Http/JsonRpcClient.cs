@@ -133,7 +133,7 @@ namespace Solnet.Rpc.Core.Http
         /// <returns>A task that represents the asynchronous operation that holds the request result.</returns>
         private async Task<RequestResult<T>> HandleResult<T>(JsonRpcRequest req, HttpResponseMessage response)
         {
-            RequestResult<T> result = new RequestResult<T>(response);
+            RequestResult<T> result = new(response);
             try
             {
                 result.RawRpcResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -243,7 +243,7 @@ namespace Solnet.Rpc.Core.Http
         private async Task<RequestResult<JsonRpcBatchResponse>> HandleBatchResult(JsonRpcBatchRequest reqs, HttpResponseMessage response)
         {
             var id_for_log = reqs.Min(x => x.Id);
-            RequestResult<JsonRpcBatchResponse> result = new RequestResult<JsonRpcBatchResponse>(response);
+            RequestResult<JsonRpcBatchResponse> result = new(response);
             try
             {
                 result.RawRpcResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);

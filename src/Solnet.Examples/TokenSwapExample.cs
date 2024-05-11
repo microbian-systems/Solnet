@@ -28,7 +28,7 @@ namespace Solnet.Examples
             var obj = TokenSwapAccount.Deserialize(Convert.FromBase64String(resp.Result.Value.Data[0]));
             Console.WriteLine($"Pool Mint: {obj.PoolMint}");
 
-            Wallet.Wallet wallet = new Wallet.Wallet(MnemonicWords);
+            Wallet.Wallet wallet = new(MnemonicWords);
 
             var tokenAMint = new Account();
             var tokenAUserAccount = new Account();

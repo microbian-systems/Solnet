@@ -64,7 +64,7 @@ namespace Solnet.Wallet
                 throw new ArgumentException("Not a secret key");
             }
 
-            Account acc = new Account(skeyBytes, skeyBytes.Slice(32, 64));
+            Account acc = new(skeyBytes, skeyBytes.Slice(32, 64));
 
             return acc;
         }

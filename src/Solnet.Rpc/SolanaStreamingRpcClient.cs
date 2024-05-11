@@ -28,17 +28,17 @@ namespace Solnet.Rpc
         /// <summary>
         /// Message Id generator.
         /// </summary>
-        private readonly IdGenerator _idGenerator = new IdGenerator();
+        private readonly IdGenerator _idGenerator = new();
 
         /// <summary>
         /// Maps the internal ids to the unconfirmed subscription state objects.
         /// </summary>
-        private readonly Dictionary<int, SubscriptionState> unconfirmedRequests = new Dictionary<int, SubscriptionState>();
+        private readonly Dictionary<int, SubscriptionState> unconfirmedRequests = new();
 
         /// <summary>
         /// Maps the server ids to the confirmed subscription state objects.
         /// </summary>
-        private readonly Dictionary<int, SubscriptionState> confirmedSubscriptions = new Dictionary<int, SubscriptionState>();
+        private readonly Dictionary<int, SubscriptionState> confirmedSubscriptions = new();
 
         /// <summary>
         /// Internal constructor.
@@ -71,7 +71,7 @@ namespace Solnet.Rpc
         /// <inheritdoc cref="StreamingRpcClient.HandleNewMessage(Memory{byte})"/>
         protected override void HandleNewMessage(Memory<byte> messagePayload)
         {
-            Utf8JsonReader jsonReader = new Utf8JsonReader(messagePayload.Span);
+            Utf8JsonReader jsonReader = new(messagePayload.Span);
             jsonReader.Read();
 
             if (_logger?.IsEnabled(LogLevel.Information) ?? false)
@@ -158,7 +158,7 @@ namespace Solnet.Rpc
         /// <param name="reader">The jsonReader that read the message so far.</param>
         private void HandleError(ref Utf8JsonReader reader)
         {
-            JsonSerializerOptions opts = new JsonSerializerOptions() { MaxDepth = 64, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            JsonSerializerOptions opts = new() { MaxDepth = 64, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
             var err = JsonSerializer.Deserialize<ErrorContent>(ref reader, opts);
 
             reader.Read();
@@ -270,7 +270,7 @@ namespace Solnet.Rpc
         /// <param name="subscriptionId">The subscriptionId for this message.</param>
         private void HandleDataMessage(ref Utf8JsonReader reader, string method, int subscriptionId)
         {
-            JsonSerializerOptions opts = new JsonSerializerOptions() { MaxDepth = 64, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            JsonSerializerOptions opts = new() { MaxDepth = 64, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
             var sub = RetrieveSubscription(subscriptionId);
 
@@ -529,7 +529,7 @@ namespace Solnet.Rpc
                 _logger?.LogInformation(new EventId(msg.Id, msg.Method), $"[Sending]{jsonString}");
             }
 
-            ReadOnlyMemory<byte> mem = new ReadOnlyMemory<byte>(json);
+            ReadOnlyMemory<byte> mem = new(json);
 
             try
             {

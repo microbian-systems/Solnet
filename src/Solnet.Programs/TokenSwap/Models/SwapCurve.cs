@@ -12,7 +12,7 @@ namespace Solnet.Programs.TokenSwap.Models
         /// <summary>
         /// The constant procuct curve
         /// </summary>
-        public static SwapCurve ConstantProduct => new SwapCurve() { CurveType = CurveType.ConstantProduct, Calculator = new ConstantProductCurve() };
+        public static SwapCurve ConstantProduct => new() { CurveType = CurveType.ConstantProduct, Calculator = new ConstantProductCurve() };
 
         /// <summary>
         /// The curve type.
