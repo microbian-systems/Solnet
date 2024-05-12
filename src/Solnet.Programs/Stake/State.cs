@@ -1,11 +1,7 @@
 ﻿using Solnet.Wallet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Solnet.Programs.Models.Stake
+namespace Solnet.Programs.Stake
 {
     /// <summary>
     /// Represents <see cref="StakeProgram"/> State Structs in Solana.

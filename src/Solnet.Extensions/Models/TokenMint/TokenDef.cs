@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Solnet.Extensions.Models.TokenWallet;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Solnet.Extensions.TokenMint
+namespace Solnet.Extensions.Models.TokenMint
 {
     /// <summary>
     /// Token Definition object used by the TokenMintResolver
