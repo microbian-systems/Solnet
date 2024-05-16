@@ -10,5 +10,9 @@
     <ProjectReference Include="..\Solnet.Wallet\Solnet.Wallet.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ThrowGuard" Version="1.0.6" />
+  </ItemGroup>
+
   <Import Project="..\..\SharedBuildProperties.props" />
 </Project>
