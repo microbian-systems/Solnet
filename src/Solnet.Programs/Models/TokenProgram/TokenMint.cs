@@ -2,108 +2,107 @@
 using System;
 using Solnet.Programs.Utilities;
 
-namespace Solnet.Programs.Models.TokenProgram
+namespace Solnet.Programs.Models.TokenProgram;
+
+/// <summary>
+/// Represents a <see cref="Programs.TokenProgram" /> token mint account.
+/// </summary>
+public class TokenMint
 {
     /// <summary>
-    /// Represents a <see cref="Programs.TokenProgram" /> token mint account.
+    /// The layout of the <see cref="TokenMint"/> structure.
     /// </summary>
-    public class TokenMint
+    public static class Layout
     {
         /// <summary>
-        /// The layout of the <see cref="TokenMint"/> structure.
+        /// The length of the structure.
         /// </summary>
-        public static class Layout
-        {
-            /// <summary>
-            /// The length of the structure.
-            /// </summary>
-            public const int Length = 82;
-
-            /// <summary>
-            /// The offset at which the mint authority COption begins.
-            /// </summary>
-            public const int MintAuthorityOptionOffset = 0;
-
-            /// <summary>
-            /// The offset at which the mint authority pubkey value begins.
-            /// </summary>
-            public const int MintAuthorityOffset = 4;
-
-            /// <summary>
-            /// The offset at which the supply value begins.
-            /// </summary>
-            public const int SupplyOffset = 36;
-
-            /// <summary>
-            /// The offset at which the decimals value begins.
-            /// </summary>
-            public const int DecimalsOffset = 44;
-
-            /// <summary>
-            /// The offset at which the is initialized value begins.
-            /// </summary>
-            public const int IsInitializedOffset = 45;
-
-            /// <summary>
-            /// The offset at which the freeze authority COption begins.
-            /// </summary>
-            public const int FreezeAuthorityOptionOffset = 46;
-
-            /// <summary>
-            /// The offset at which the freeze authority pubkey value begins.
-            /// </summary>
-            public const int FreezeAuthorityOffset = 50;
-        }
+        public const int Length = 82;
 
         /// <summary>
-        /// Optional authority to mint new tokens. If no mint authority is present, no new tokens can be issued.
+        /// The offset at which the mint authority COption begins.
         /// </summary>
-        public PublicKey MintAuthority { get; set; }
+        public const int MintAuthorityOptionOffset = 0;
 
         /// <summary>
-        /// Total supply of tokens.
+        /// The offset at which the mint authority pubkey value begins.
         /// </summary>
-        public ulong Supply { get; set; }
+        public const int MintAuthorityOffset = 4;
 
         /// <summary>
-        /// Number of base 10 digits to the right of the decimal polace.
+        /// The offset at which the supply value begins.
         /// </summary>
-        public byte Decimals { get; set; }
+        public const int SupplyOffset = 36;
 
         /// <summary>
-        /// Whether or not the account has been initialized.
+        /// The offset at which the decimals value begins.
         /// </summary>
-        public bool IsInitialized { get; set; }
+        public const int DecimalsOffset = 44;
 
         /// <summary>
-        /// Optional authority to freeze token accounts.
+        /// The offset at which the is initialized value begins.
         /// </summary>
-        public PublicKey FreezeAuthority { get; set; }
-
+        public const int IsInitializedOffset = 45;
 
         /// <summary>
-        /// Deserialize the given data into the <see cref="TokenMint"/> structure.
+        /// The offset at which the freeze authority COption begins.
         /// </summary>
-        /// <param name="data">The data.</param>
-        /// <returns>The <see cref="TokenMint"/> structure.</returns>
-        public static TokenMint Deserialize(ReadOnlySpan<byte> data)
-        {
-            if (data.Length != Layout.Length)
-                throw new ArgumentException($"{nameof(data)} has wrong size. Expected {Layout.Length} bytes, actual {data.Length} bytes.");
+        public const int FreezeAuthorityOptionOffset = 46;
 
-            var res = new TokenMint();
+        /// <summary>
+        /// The offset at which the freeze authority pubkey value begins.
+        /// </summary>
+        public const int FreezeAuthorityOffset = 50;
+    }
 
-            if (data.GetU32(Layout.MintAuthorityOptionOffset) == 1)
-                res.MintAuthority = data.GetPubKey(Layout.MintAuthorityOffset);
+    /// <summary>
+    /// Optional authority to mint new tokens. If no mint authority is present, no new tokens can be issued.
+    /// </summary>
+    public PublicKey MintAuthority { get; set; }
 
-            res.Supply = data.GetU64(Layout.SupplyOffset);
-            res.Decimals = data.GetU8(Layout.DecimalsOffset);
-            res.IsInitialized= data.GetBool(Layout.IsInitializedOffset);
+    /// <summary>
+    /// Total supply of tokens.
+    /// </summary>
+    public ulong Supply { get; set; }
 
-            if (data.GetU32(Layout.FreezeAuthorityOptionOffset) == 1)
-                res.FreezeAuthority = data.GetPubKey(Layout.FreezeAuthorityOptionOffset);
+    /// <summary>
+    /// Number of base 10 digits to the right of the decimal polace.
+    /// </summary>
+    public byte Decimals { get; set; }
 
-            return res;
-        }
+    /// <summary>
+    /// Whether or not the account has been initialized.
+    /// </summary>
+    public bool IsInitialized { get; set; }
+
+    /// <summary>
+    /// Optional authority to freeze token accounts.
+    /// </summary>
+    public PublicKey FreezeAuthority { get; set; }
+
+
+    /// <summary>
+    /// Deserialize the given data into the <see cref="TokenMint"/> structure.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <returns>The <see cref="TokenMint"/> structure.</returns>
+    public static TokenMint Deserialize(ReadOnlySpan<byte> data)
+    {
+        if (data.Length != Layout.Length)
+            throw new ArgumentException($"{nameof(data)} has wrong size. Expected {Layout.Length} bytes, actual {data.Length} bytes.");
+
+        var res = new TokenMint();
+
+        if (data.GetU32(Layout.MintAuthorityOptionOffset) == 1)
+            res.MintAuthority = data.GetPubKey(Layout.MintAuthorityOffset);
+
+        res.Supply = data.GetU64(Layout.SupplyOffset);
+        res.Decimals = data.GetU8(Layout.DecimalsOffset);
+        res.IsInitialized= data.GetBool(Layout.IsInitializedOffset);
+
+        if (data.GetU32(Layout.FreezeAuthorityOptionOffset) == 1)
+            res.FreezeAuthority = data.GetPubKey(Layout.FreezeAuthorityOptionOffset);
+
+        return res;
     }
 }

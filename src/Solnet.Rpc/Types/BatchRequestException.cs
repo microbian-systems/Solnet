@@ -6,26 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solnet.Rpc.Types
+namespace Solnet.Rpc.Types;
+
+/// <summary>
+/// Encapsulates the batch request failure that is relayed to all callbacks
+/// </summary>
+public class BatchRequestException : ApplicationException
 {
     /// <summary>
-    /// Encapsulates the batch request failure that is relayed to all callbacks
+    /// The RPC result that failed
     /// </summary>
-    public class BatchRequestException : ApplicationException
+    public RequestResult<JsonRpcBatchResponse> RpcResult;
+
+    /// <summary>
+    /// Contructs a BatchRequestException based on the JsonRpcBatchResponse result.
+    /// </summary>
+    /// <param name="result"></param>
+    public BatchRequestException(RequestResult<JsonRpcBatchResponse> result) : base($"Batch request failure - {result.Reason}")
     {
-        /// <summary>
-        /// The RPC result that failed
-        /// </summary>
-        public RequestResult<JsonRpcBatchResponse> RpcResult;
-
-        /// <summary>
-        /// Contructs a BatchRequestException based on the JsonRpcBatchResponse result.
-        /// </summary>
-        /// <param name="result"></param>
-        public BatchRequestException(RequestResult<JsonRpcBatchResponse> result) : base($"Batch request failure - {result.Reason}")
-        {
-            RpcResult = result;
-        }
-
+        RpcResult = result;
     }
+
 }

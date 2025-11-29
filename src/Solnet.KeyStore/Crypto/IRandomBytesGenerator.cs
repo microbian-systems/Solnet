@@ -1,8 +1,7 @@
-namespace Solnet.KeyStore.Crypto
+namespace Solnet.KeyStore.Crypto;
+
+public interface IRandomBytesGenerator
 {
-    public interface IRandomBytesGenerator
-    {
-        byte[] GenerateRandomInitializationVector();
-        byte[] GenerateRandomSalt();
-    }
+    byte[] GenerateRandomInitializationVector();
+    byte[] GenerateRandomSalt();
 }

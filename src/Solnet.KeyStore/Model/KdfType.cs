@@ -1,8 +1,7 @@
-namespace Solnet.KeyStore.Model
+namespace Solnet.KeyStore.Model;
+
+public enum KdfType
 {
-    public enum KdfType
-    {
-        Scrypt,
-        Pbkdf2
-    }
+    Scrypt,
+    Pbkdf2
 }

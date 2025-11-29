@@ -1,11 +1,10 @@
 using System;
 
-namespace Solnet.KeyStore.Exceptions
+namespace Solnet.KeyStore.Exceptions;
+
+public class DecryptionException : Exception
 {
-    public class DecryptionException : Exception
+    internal DecryptionException(string msg) : base(msg)
     {
-        internal DecryptionException(string msg) : base(msg)
-        {
-        }
     }
 }

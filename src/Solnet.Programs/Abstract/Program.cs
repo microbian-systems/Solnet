@@ -5,20 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solnet.Programs.Abstract
+namespace Solnet.Programs.Abstract;
+
+/// <summary>
+/// Base Program interface.
+/// </summary>
+public interface Program
 {
     /// <summary>
-    /// Base Program interface.
+    /// The program's key
     /// </summary>
-    public interface Program
-    {
-        /// <summary>
-        /// The program's key
-        /// </summary>
-        PublicKey ProgramIdKey { get; }
-        /// <summary>
-        /// The name of the program
-        /// </summary>
-        string ProgramName { get; }
-    }
+    PublicKey ProgramIdKey { get; }
+    /// <summary>
+    /// The name of the program
+    /// </summary>
+    string ProgramName { get; }
 }

@@ -1,26 +1,25 @@
 using Org.BouncyCastle.Security;
 
-namespace Solnet.KeyStore.Crypto
+namespace Solnet.KeyStore.Crypto;
+
+public class RandomBytesGenerator : IRandomBytesGenerator
 {
-    public class RandomBytesGenerator : IRandomBytesGenerator
+    private static readonly SecureRandom Random = new SecureRandom();
+
+    public byte[] GenerateRandomInitializationVector()
     {
-        private static readonly SecureRandom Random = new SecureRandom();
+        return GenerateRandomBytes(16);
+    }
 
-        public byte[] GenerateRandomInitializationVector()
-        {
-            return GenerateRandomBytes(16);
-        }
+    public byte[] GenerateRandomSalt()
+    {
+        return GenerateRandomBytes(32);
+    }
 
-        public byte[] GenerateRandomSalt()
-        {
-            return GenerateRandomBytes(32);
-        }
-
-        private static byte[] GenerateRandomBytes(int size)
-        {
-            var bytes = new byte[size];
-            Random.NextBytes(bytes);
-            return bytes;
-        }
+    private static byte[] GenerateRandomBytes(int size)
+    {
+        var bytes = new byte[size];
+        Random.NextBytes(bytes);
+        return bytes;
     }
 }
